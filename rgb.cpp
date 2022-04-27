@@ -1,4 +1,5 @@
 
+
 #include <iostream>
 #include <string>
 #include <sstream>
@@ -9,7 +10,7 @@
 
 using namespace std;
 
-int diff;
+//int diff;
 
 struct rgb {
 	string color;
@@ -20,9 +21,15 @@ struct input {
 	vector<int> number;
 };
 
+struct diff{
+	vector<int> value;
+};
 
+/*
 struct count {
 	int x;
+	vector<diff> han;
+	
 	count(int a) : x(a) {}
 	bool operator()(const rgb& foo, const input& yu) const {
 		diff = 0;
@@ -38,8 +45,27 @@ struct count {
 		}
 	}
 };
+*/
+int count( rgb& foo, input& yu){
+	int sum = 0;
+	int i ;
+	for(i = 0; i < foo.rgb_value.size(); ++i){
+		sum += abs(foo.rgb_value[i] - yu.number[i]);
+	}
+
+	return sum;
+}
 
 
+void print(rgb& a, rgb& b, int& diff){
+	for(int i = 0; i < a.color.size(); ++i){
+		if(diff >= 20){
+			cout << "無相近顏色" << endl;
+		}else if(diff < 20){
+			cout << a.color[i] << "[ " << diff << " ]" << a.rgb_value << endl;		
+		}
+	}
+}
 
 
 istream& operator>> (istream& in, rgb& foo) {
@@ -121,7 +147,7 @@ int main()
 			yu.push_back(input_number);
 		}
 		istr.clear();
-		//print(foo.begin(), foo.end(), count(20));
+		print(foo.begin(), foo.end(), count(rgb& foo, input& yu));
 
 
 
